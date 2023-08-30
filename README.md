@@ -125,7 +125,7 @@ dbt build
 
 
 
-That’s it! Ruffle up those feathers and start quacking and slapping those juicy SQL queries together to solve the analytics problems faster and cheaper than ever before!
+That’s it! Ruffle up those feathers and start quacking and slapping those juicy SQL queries together to solve your analytics problems faster and cheaper than ever before!
 
 ## Conclusion
 
