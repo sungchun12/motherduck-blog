@@ -23,6 +23,8 @@ Well, DuckDB and Motherduck’s primary use case is solving analytical problems 
 
 But more than platitudes, let’s get hands-on with working code so you can taste and see for yourself!
 
+## Get Started
+
 You can follow along with this repo: https://github.com/sungchun12/jaffle_shop_duckdb/tree/blog-guide
 
 1. Signup for a MotherDuck account! https://motherduck.com/
@@ -46,3 +48,85 @@ cd jaffle_shop_duckdb
 > Note: Feel free to skip this step if you already have an AWS account with S3 setup!
 
 6. Take the csv files stored in the git repo here and upload them into S3: https://github.com/sungchun12/jaffle_shop_duckdb/tree/blog-guide/seeds
+![signin](/images/seeds.png)
+![signin](/images/s3_seeds.png)
+
+7. Copy the AWS S3 access keys to authenticate your dbt project for later: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html 
+
+## Configure Your dbt project
+> Note: Huge thanks to Josh Wills for creating the dbt-duckdb adapter and it works great with both DuckDB and MotherDuck: https://github.com/jwills/dbt-duckdb. This demo only works with DuckDB version 0.8.1: https://motherduck.com/docs/intro
+
+1. Adjust your `profiles.yml` for the naming conventions that make sense to you. Specifically, focus on schema. 
+
+```yaml
+jaffle_shop:
+
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      schema: dev_sung
+      path: 'md:jaffle_shop'
+      threads: 16
+      extensions: 
+        - httpfs
+      settings:
+        s3_region: us-west-1
+        s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
+        s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
+
+    prod:
+      type: duckdb
+      schema: prod_sung
+      path: 'md:jaffle_shop'
+      threads: 16
+      extensions: 
+        - httpfs
+      settings:
+        s3_region: us-west-1
+        s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
+        s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
+```
+
+2. Export your motherduck and S3 credentials to the terminal session, so your dbt project can authenticate to both
+
+```shell
+# all examples are fake
+export motherduck_token=<your motherduck token> # aouiweh98229g193g1rb9u1
+export S3_ACCESS_KEY_ID=<your access key id> # haoiwehfpoiahpwohf
+export S3_SECRET_ACCESS_KEY=<your secret access key> # jiaowhefa998333
+```
+
+3. Create a python virtual environment and install the packages to run this dbt project
+
+```shell
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+```
+
+4. Run `dbt debug` to verify dbt can connect to motherduck and S3
+
+```shell
+dbt debug
+```
+
+5. Run `dbt build` to run and test the project!
+
+```shell
+dbt build
+```
+
+6. Now, you should see everything ran with green font everywhere and you should see this in the UI! Including the S3 data you built a dbt model on top of!
+
+![signin](/images/green_logs.png)
+![signin](/images/motherduck_success.png)
+
+
+
+That’s it! Ruffle up those feathers and start quacking and slapping those juicy SQL queries together to solve the analytics problems faster and cheaper than ever before!
+
+## Conclusion
+
+We’re at a really cool place where all I had to give you was a couple instructions to get you up and running with MotherDuck. I really hope the data industry gets to a place where we brag about the things we do NOT have to do vs. pride ourselves on complexity for its own sake. What matters is that we solve problems and spend time, money, and energy doing it where it’s actually worth it to solve those problems. I’m excited to see you all build MotherDuck guides far superior to mine. That’s why this is so fun. We get to sharpen each other!
