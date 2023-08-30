@@ -30,3 +30,19 @@ You can follow along with this repo: https://github.com/sungchun12/jaffle_shop_d
 
 2. Sign in and your screen should look like this minus some of the stuff you’ll be building in the rest of this guide.
 ![signin](/images/signin.png)
+
+3. Click on the settings in the upper right hand corner and copy your Service Token to the clipboard.
+![signin](/images/service_token.png)
+
+4. Clone the repo and change directories into it.
+
+```bash
+git clone -b blog-guide https://github.com/sungchun12/jaffle_shop_duckdb.git
+cd jaffle_shop_duckdb
+```
+
+5. Follow the detailed instructions to setup your free AWS account and use S3: https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html
+
+> Note: Feel free to skip this step if you already have an AWS account with S3 setup!
+
+6. Take the csv files stored in the git repo here and upload them into S3: https://github.com/sungchun12/jaffle_shop_duckdb/tree/blog-guide/seeds
