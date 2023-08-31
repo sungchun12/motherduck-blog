@@ -69,7 +69,19 @@ jaffle_shop:
       extensions: 
         - httpfs
       settings:
-        s3_region: us-west-1
+        s3_region: "{{ env_var('S3_REGION', 'us-west-1') }}"
+        s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
+        s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
+
+    dev_public_s3:
+      type: duckdb
+      schema: dev_sung
+      path: 'md:jaffle_shop'
+      threads: 16
+      extensions: 
+        - httpfs
+      settings:
+        s3_region: "{{ env_var('S3_REGION', 'us-east-1') }}" # default region to make hello_public_s3.sql work correctly!
         s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
         s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
 
@@ -116,7 +128,30 @@ dbt debug
 dbt build
 ```
 
-6. Now, you should see everything ran with green font everywhere and you should see this in the UI! Including the S3 data you built a dbt model on top of!
+6. If you're feeling adventurous, run the below to reference a public s3 bucket provided by MotherDuck!
+
+<details>
+  <summary>Impacted dbt model</summary>
+
+  ```sql
+  --filename: hello_public_s3.sql
+  {% if target.name == 'dev_public_s3' %}
+
+  SELECT * FROM 's3://us-prd-motherduck-open-datasets/jaffle_shop/csv/raw_customers.csv'
+
+  {% else %}
+
+  select 1 as id
+
+  {% endif %}
+  ```
+</details>
+
+```shell
+dbt build --target dev_public_s3
+```
+
+7. Now, you should see everything ran with green font everywhere and you should see this in the UI! Including the S3 data you built a dbt model on top of!
 
 ![signin](/images/green_logs.png)
 ![signin](/images/motherduck_success.png)
