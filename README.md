@@ -103,6 +103,7 @@ jaffle_shop:
 ```shell
 # all examples are fake
 export motherduck_token=<your motherduck token> # aouiweh98229g193g1rb9u1
+export S3_REGION=<your region> # us-west-1
 export S3_ACCESS_KEY_ID=<your access key id> # haoiwehfpoiahpwohf
 export S3_SECRET_ACCESS_KEY=<your secret access key> # jiaowhefa998333
 ```
