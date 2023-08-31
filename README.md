@@ -1,18 +1,16 @@
 # MotherDuck + dbt: Better Together
 
 ## My Personal DuckDB Story
-DuckDB has been charming to me ever since I wrote about it a year ago.
-https://roundup.getdbt.com/p/dbt-learning-to-love-software-engineers
+DuckDB has been charming to me ever since I wrote [about it a year ago](https://roundup.getdbt.com/p/dbt-learning-to-love-software-engineers).
 
 It gave me the glimmers of something I’ve been begging for a long time: fast should be measured in seconds, not minutes.
 
-I kicked the tires a lot when working at dbt Labs. You see this here: https://github.com/dbt-labs/jaffle_shop_duckdb
+[I kicked the tires a lot when working at dbt Labs](https://github.com/dbt-labs/jaffle_shop_duckdb).
 
-And here:
-https://www.loom.com/share/ed4a6f59957e43158837eb4ba0c5ed67
+- [And here](https://www.loom.com/share/ed4a6f59957e43158837eb4ba0c5ed67)
 
-And most recently here: 
-https://www.loom.com/share/e213768457094a3187663a6cff76a61d?sid=29d6d696-0581-4b50-af45-7132dfb65f80
+
+- [And most recently here](https://www.loom.com/share/e213768457094a3187663a6cff76a61d?sid=29d6d696-0581-4b50-af45-7132dfb65f80)
 
 And in all the tire kicking, it has remained true to the glimmers it gave me and so much more. It’s fast, easy, and cheap. And if it’s running on your local computer, it’s free. 
 
